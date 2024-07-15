@@ -1,9 +1,14 @@
-import productImgOne from "../assets/Rectangle 1 (1).png"
-import productImgTwo from "../assets/Rectangle 1 (2).png"
-import productImgThree from "../assets/Rectangle 1 (3).png"
-import productImgFour from "../assets/Rectangle 1 (4).png"
-import productImgFive from "../assets/Rectangle 1 (5).png"
-import productImgSix from "../assets/Rectangle 1 (6).png"
+import productImgOne from "../assets/Rectangle 1 (1).png";
+import productImgTwo from "../assets/Rectangle 1 (2).png";
+import productImgThree from "../assets/Rectangle 1 (3).png";
+import productImgFour from "../assets/Rectangle 1 (4).png";
+import productImgFive from "../assets/Rectangle 1 (5).png";
+import productImgSix from "../assets/Rectangle 1 (6).png";
+
+import topSellProductOne from "../assets/topseller/headphone-removebg-preview.png";
+import topSellProductTwo from "../assets/topseller/lipbam.jpg";
+import topSellProductThree from "../assets/topseller/shoes-removebg-preview.png";
+import topSellProductFour from "../assets/topseller/snakears.jpg";
 
 const products = [
     {
@@ -56,4 +61,36 @@ const products = [
     },
 ];
 
-export default products;
+const topSellers = [
+    {
+        id: 1,
+        title: "Wireless Headphones",
+        price: 99.99,
+        image: topSellProductOne
+    },
+    {
+        id: 2,
+        title: "Organic Lip Balm",
+        price: 14.99,
+        image: topSellProductTwo
+    },
+    {
+        id: 3,
+        title: "Running Shoes",
+        price: 89.99,
+        image: topSellProductThree
+    },
+    {
+        id: 4,
+        title: "Silver Snake Earrings",
+        price: 19.99,
+        image: topSellProductFour
+    }
+];
+
+const fakeData = {
+    products,
+    topSellers
+};
+
+export default fakeData;
