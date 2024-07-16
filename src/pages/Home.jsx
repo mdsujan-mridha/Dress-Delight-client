@@ -2,6 +2,9 @@ import React from 'react';
 import Hero from '../components/Hero';
 import NewArival from '../components/NewArival';
 import { FaShippingFast } from "react-icons/fa";
+import { BiSupport } from "react-icons/bi";
+import { GiReturnArrow } from "react-icons/gi";
+import { FaFingerprint } from "react-icons/fa";
 import TopSeller from '../components/TopSeller';
 const Home = () => {
     return (
@@ -18,21 +21,21 @@ const Home = () => {
                         </div>
                     </div>
                     <div className='flex justify-between gap-5 p-5 hover:shadow-md'>
-                        <div><FaShippingFast size={35} color='#024E82' /></div>
+                        <div><BiSupport  size={35} color='#024E82' /></div>
                         <div>
                             <h4 className="text-md uppercase  lato-bold">SUPPORT 24/7</h4>
                             <p>Our support team is there <br /> to help you for queries</p>
                         </div>
                     </div>
                     <div className='flex justify-between gap-5 p-5 hover:shadow-md'>
-                        <div><FaShippingFast size={35} color='#024E82' /></div>
+                        <div><GiReturnArrow size={35} color='#024E82' /></div>
                         <div>
                             <h4 className="text-md uppercase  lato-bold">30 DAYS RETURN</h4>
                             <p>Enjoy free shipping on all  <br />orders above $100</p>
                         </div>
                     </div>
                     <div className='flex justify-between gap-5 p-5 hover:shadow-md'>
-                        <div><FaShippingFast size={35} color='#024E82' /></div>
+                        <div><FaFingerprint size={35} color='#024E82' /></div>
                         <div>
                             <h4 className="text-md uppercase  lato-bold">100% PAYMENT SECURE</h4>
                             <p>Enjoy free shipping on all <br /> orders above $100</p>

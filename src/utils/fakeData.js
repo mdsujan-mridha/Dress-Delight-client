@@ -88,9 +88,58 @@ const topSellers = [
     }
 ];
 
+const Founder = [
+    {
+        id: 1,
+        name: "HM Jawad",
+        image: "https://i.ibb.co/0nfmySZ/Rectangle-8-3.png"
+    },
+    {
+        id: 2,
+        name: "Furqan Abid",
+        image: "https://i.ibb.co/QbffGTn/Rectangle-8.png"
+    },
+    {
+        id: 3,
+        name: "Abdullah Ah",
+        image: "https://i.ibb.co/DfM5Q1Q/Rectangle-8-2.png"
+    },
+    {
+        id: 4,
+        name: "Abrar Khan",
+        image: "https://i.ibb.co/1GfXRKt/Rectangle-8-1.png"
+    }
+]
+
+const reviews = [
+    {
+        id: 1,
+        name: "Stacy",
+        image: "https://i.ibb.co/JQZnGfm/unsplash-6-W4-F62s-N-y-I.png",
+        review: "Once we ordered some accessories items and we got the products delivered in our doorstep, the customer support was super helpful and they answered all my queries.",
+        rating: 5
+    },
+    {
+        id: 2,
+        name: "Tiffany",
+        image: "https://i.ibb.co/dLPLqP2/unsplash-6-W4-F62s-N-y-I-1.png",
+        review: "I ordered a few items from your website and I received them on time. I am very satisfied with the quality of products.",
+        rating: 4
+    },
+    {
+        id: 3,
+        name: "James",
+        image: "https://i.ibb.co/Pxxrn13/unsplash-6-W4-F62s-N-y-I-2.png",
+        review: "I got a wrong shirt so I contacted them and they happily offered me a refund. I will surely shop from them again.",
+        rating: 3
+    }
+]
+
 const fakeData = {
     products,
-    topSellers
+    topSellers,
+    Founder,
+    reviews
 };
 
 export default fakeData;
