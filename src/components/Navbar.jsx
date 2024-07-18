@@ -18,7 +18,7 @@ const Navbar = () => {
         },
         {
             id: 4,
-            menu: <Link to="/post">Blog</Link>
+            menu: <Link to="/blogs">Blog</Link>
         },
         {
             id: 5,

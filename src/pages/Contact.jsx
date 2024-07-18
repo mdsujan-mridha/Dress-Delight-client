@@ -40,7 +40,7 @@ const Contact = () => {
                                 <input
                                     type="submit"
                                     value="send message"
-                                    className='w-56 h-14 text-primary lato-regular'
+                                    className='w-56 h-14 text-primary lato-regular cursor-pointer'
                                     style={{ backgroundColor: "#024E82" }}
                                 />
                             </div>
