@@ -6,9 +6,9 @@ const Blogs = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch(`https://newsapi.org/v2/everything?q=tesla&from=2024-06-18&sortBy=publishedAt&apiKey=565049e1f5da4391b92a464c5df76bb9`)
+        fetch(`https://newsapi.org/v2/everything?q=tesla&from=2024-06-27&sortBy=publishedAt&apiKey=565049e1f5da4391b92a464c5df76bb9`)
             .then(res => res.json())
-            .then(data => setPosts(data.articles))
+            .then(data => setPosts(data?.articles))
 
     }, [])
     console.log(posts);
