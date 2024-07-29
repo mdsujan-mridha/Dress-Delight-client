@@ -208,7 +208,7 @@ const Products = () => {
                                 </div>
                             ))}
                         </div>
-                        <div>
+                        <div className='mt-10'>
                             <h1 className='text-left lato-regular text-xl border-b-2 pb-2 border-secondary border-opacity-50'> Filter by price </h1>
                             <div className='mt-5'>
                                 <Slider
