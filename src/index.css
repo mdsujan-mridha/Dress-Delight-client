@@ -27,3 +27,27 @@
   font-weight: 900;
   font-style: normal;
 }
+
+/* for subcategory */
+.category-container {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.subcategories {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.category-container:hover .subcategories {
+  display: block;
+}
+
+.subcategory-item {
+  margin-bottom: 5px;
+}
