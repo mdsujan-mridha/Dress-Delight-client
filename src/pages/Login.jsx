@@ -1,19 +1,28 @@
 import { useFileHandler, useInputValidation, useStrongPassword } from '6pp';
 import { Avatar, Button, Container, IconButton, Paper, Stack, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { userEmailValidator } from '../utils/valodator';
 import { BiCamera } from 'react-icons/bi';
 import { VisuallyHiddenInput } from '../style/StyledComponent';
 import { bgGradient } from '../constant/color';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, login, register } from '../redux/action/userAction';
+import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const { error, loading, isAuthenticated } = useSelector((state) => state.user);
     const [isLogin, setIsLogin] = useState(true);
     const name = useInputValidation("");
     const password = useStrongPassword("");
     const email = useInputValidation("", userEmailValidator);
+    const location = useLocation();
+    const navigate = useNavigate()
     const avatar = useFileHandler("single");
-    // console.log(email.value);
 
+    // console.log(email.value);
+    // console.log(avatar);
     const toggleLogin = () => {
         setIsLogin(prev => !prev)
     }
@@ -24,7 +33,8 @@ const Login = () => {
         formData.append("password", password.value);
         formData.append("email", email.value);
         formData.append("avatar", avatar.file);
-        console.log(formData);
+        dispatch(register(formData));
+
     }
     const handleLogin = (e) => {
         e.preventDefault();
@@ -32,9 +42,25 @@ const Login = () => {
         formData.append("password", password.value);  // Assuming password is a DOM element or ref
         formData.append("email", email.value);        // Assuming email is a DOM element or ref
         // To log the formData content
-        console.log(formData);
+        dispatch(login(email.value, password.value));
     }
 
+    const redirect = location.search ? location.search.split("=")[1] : "/profile";
+
+    useEffect(() => {
+
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors())
+        }
+        if (isAuthenticated) {
+            toast.success("Login Successfully");
+            navigate(redirect);
+        }
+
+    }, [dispatch, error, isAuthenticated,redirect,navigate]);
+    // console.log(email.value);
+    // console.log(password.value);
 
     return (
         <div style={{ backgroundImage: bgGradient }}>

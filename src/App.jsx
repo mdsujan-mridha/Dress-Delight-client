@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import Blogs from './pages/Blogs';
 import Products from './pages/Products';
 import Login from './pages/Login';
+import { Toaster } from 'react-hot-toast';
+import Profile from './pages/Profile';
 function App() {
 
 
@@ -25,7 +27,9 @@ function App() {
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
+        <Toaster />
         <Footer />
       </Router>
 
