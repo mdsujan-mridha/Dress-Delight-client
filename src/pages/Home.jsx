@@ -11,7 +11,12 @@ const Home = () => {
         <div className='px-0'>
             <Hero />
             <div className='px-12'>
-                <NewArival />
+                <NewArival 
+                from={0}
+                to={4}
+                title={"Discover NEW Arrivals"}
+                subTitle={"Recently added shirts!"}
+                />
                 <div className='py-12 flex justify-between items-center'>
                     <div className='flex justify-between gap-5 p-5 hover:shadow-md'>
                         <div><FaShippingFast size={35} color='#024E82' /></div>
@@ -42,6 +47,12 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+                <NewArival 
+                 from={6}
+                 to={10}
+                 title={"Trending product"}
+                 subTitle={"Explore our trending product!"}
+                />
                 <div className='flex justify-between items-center pb-12 gap-5'>
                     <div className='bg-secondary h-96 w-1/2 flex justify-center items-center flex-col gap-5'>
                         <h1 className='text-primary text-xl uppercase lato-regular space-x-1'>peace of mind</h1>

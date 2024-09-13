@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserOptions from './UserOptions';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
-
+    const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     const menuItem = [
         {
             id: 1,
@@ -25,10 +27,12 @@ const Navbar = () => {
             menu: <Link to="/about">About us</Link>
         },
     ]
+     
+    
 
     return (
         <div className='px-12'>
-            <div className="navbar bg-primary">
+            <div className="navbar bg-primary h-24 lg:h-22">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -54,7 +58,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="btn">Login</Link>
+                    {user ? <UserOptions/> : <Link to="/login" className="btn">Login</Link>}
                 </div>
             </div>
         </div>
