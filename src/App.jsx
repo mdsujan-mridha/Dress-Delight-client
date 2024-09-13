@@ -1,9 +1,9 @@
 
-import { Fragment } from 'react';
+import { Fragment, lazy } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from './pages/Home';
-import Navbar from './components/Navbar';
+const Home = lazy(()=> import('./pages/Home'))
+const Navbar = lazy(() => import('./components/Navbar')) 
 import Footer from './components/Footer';
 import About from './pages/About';
 import Contact from "./pages/Contact";
@@ -12,6 +12,7 @@ import Products from './pages/Products';
 import Login from './pages/Login';
 import { Toaster } from 'react-hot-toast';
 import Profile from './pages/Profile';
+import ProductDetails from './pages/ProductDetails';
 function App() {
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/product/:id' element={<ProductDetails />} />
         </Routes>
         <Toaster />
         <Footer />
