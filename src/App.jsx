@@ -1,19 +1,18 @@
 
-import { Fragment, lazy } from 'react';
+import { Fragment } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-const Navbar = lazy(() => import('./components/Navbar')) 
-const Footer =lazy(()=>import('./components/Footer')) 
-const About = lazy(()=>import('./pages/About')) ;
-const Contact = lazy(()=> import("./pages/Contact"));
-const  Blogs = lazy(()=>import('./pages/Blogs'))
-const Products = lazy(()=>import('./pages/Products'));
-const  Login = lazy(()=>import('./pages/Login'));
 import { Toaster } from 'react-hot-toast';
 import Profile from './pages/Profile';
 import ProductDetails from './pages/ProductDetails';
 import Home from './pages/Home';
+import Navbar from './components/Navbar';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Blogs from './pages/Blogs';
+import Products from './pages/Products';
+import Login from './pages/Login';
+import Footer from './components/Footer';
 function App() {
 
 
@@ -35,7 +34,6 @@ function App() {
         <Toaster />
         <Footer />
       </Router>
-
     </Fragment>
   )
 }
