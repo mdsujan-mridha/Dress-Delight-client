@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product, view }) => {
     return (
-        <div className={`product-card ${view === 'grid' ? 'grid-view' : 'list-view'} 
+        <Link to={`/product/${product?.id}`} className={`product-card ${view === 'grid' ? 'grid-view' : 'list-view'} 
             ${view === 'grid' ? 'flex flex-col w-80' : 'flex flex-row items-center'}
             bg-white border border-gray-300 rounded-lg`}>
             <img
@@ -15,7 +16,7 @@ const ProductCard = ({ product, view }) => {
                 <p className="text-gray-600">${product.price}</p>
                 {/* Add more product details as needed */}
             </div>
-        </div>
+        </Link>
     );
 };
 
