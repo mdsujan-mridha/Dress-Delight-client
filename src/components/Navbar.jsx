@@ -27,9 +27,6 @@ const Navbar = () => {
             menu: <Link to="/about">About us</Link>
         },
     ]
-     
-    
-
     return (
         <div className='px-12'>
             <div className="navbar bg-primary h-24 lg:h-22">
@@ -58,7 +55,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user ? <UserOptions/> : <Link to="/login" className="btn">Login</Link>}
+                    {user && isAuthenticated === true ? <UserOptions/> : <Link to="/login" className="btn">Login</Link>}
                 </div>
             </div>
         </div>
