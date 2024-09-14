@@ -31,7 +31,7 @@ const ProductDetails = () => {
                 <div className='w-1/2 flex justify-start flex-col gap-5'>
                     <h1 className='lato-bold text-4xl'> {product?.title} </h1>
                     <div className='flex justify-start gap-5 items-center'>
-                    <Rating {...options}/> <span className=' font-bold'> {product?.rating.count} Reviews </span>
+                    <Rating {...options}/> <span className=' font-bold'> {product?.rating?.count} Reviews </span>
                     </div>
                     <p className='text-justify'>{product?.description}</p>
                 </div>
