@@ -29,7 +29,7 @@ const Navbar = () => {
     ]
     return (
         <div className='px-12'>
-            <div className="navbar bg-primary h-24 lg:h-22">
+            <div className="navbar bg-primary h-24 lg:h-22 lg:border-b-2">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">

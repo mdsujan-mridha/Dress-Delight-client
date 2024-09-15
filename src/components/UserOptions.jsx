@@ -8,8 +8,11 @@ import { IoPerson } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
+import { useSelector } from 'react-redux';
 
 const UserOptions = () => {
+    const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+    console.log(user);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -33,14 +36,14 @@ const UserOptions = () => {
     function logout() {
         navigate("/")
     }
-    function dashboard(){
+    function dashboard() {
         navigate("/dashboard")
     }
 
     return (
         <Fragment>
             <SpeedDial
-                style={{ position: "absolute", top: 20 }}
+                style={{ position: "absolute", top: 20}}
                 ariaLabel="SpeedDial tooltip example"
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
@@ -48,7 +51,7 @@ const UserOptions = () => {
                 direction="down"
                 className=""
                 icon={
-                    <img className="speedDialIcon" src="/profile.png" alt="Profile" />
+                    <img className="speedDialIcon" src={user ? user.avatar.url : "/profile.png"} alt="Profile" />
                 }
             >
                 {

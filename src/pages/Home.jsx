@@ -1,11 +1,13 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import Hero from '../components/Hero';
-const NewArival = lazy(()=>import("../components/NewArival"));
+
 import { FaShippingFast } from "react-icons/fa";
 import { BiSupport } from "react-icons/bi";
 import { GiReturnArrow } from "react-icons/gi";
 import { FaFingerprint } from "react-icons/fa";
-const TopSeller =  lazy(()=>import('../components/TopSeller')) ;
+import NewArival from '../components/NewArival';
+import TopSeller from '../components/TopSeller';
+
 const Home = () => {
     return (
         <div className='px-0'>

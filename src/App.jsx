@@ -14,6 +14,7 @@ import Products from './pages/Products';
 import Login from './pages/Login';
 import Footer from './components/Footer';
 import 'react-tabs/style/react-tabs.css';
+import ProductCart from './pages/ProductCart';
 function App() {
 
 
@@ -31,6 +32,8 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/product/:id' element={<ProductDetails />} />
+          {/* this route will be protected  */}
+          <Route path='/cart' element={<ProductCart />}></Route>
         </Routes>
         <Toaster />
         <Footer />
