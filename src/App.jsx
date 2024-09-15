@@ -13,6 +13,7 @@ import Blogs from './pages/Blogs';
 import Products from './pages/Products';
 import Login from './pages/Login';
 import Footer from './components/Footer';
+import 'react-tabs/style/react-tabs.css';
 function App() {
 
 
