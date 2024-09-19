@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 const Blogs = () => {
 
     const [posts, setPosts] = useState([]);
+    const date = new Date();
 
     useEffect(() => {
-        fetch(`https://newsapi.org/v2/everything?q=tesla&from=2024-06-27&sortBy=publishedAt&apiKey=565049e1f5da4391b92a464c5df76bb9`)
+        fetch(`https://newsapi.org/v2/everything?q=tesla&from=${date}&sortBy=publishedAt&apiKey=565049e1f5da4391b92a464c5df76bb9`)
             .then(res => res.json())
             .then(data => setPosts(data?.articles))
 
-    }, [])
-    console.log(posts);
+    }, [date])
+    // console.log(posts);
 
     return (
         <div>
@@ -47,8 +48,8 @@ const Blogs = () => {
                 <h1 className='text-center lato-bold py-14 text-3xl'> New Blogs </h1>
                 <div className='flex flex-col gap-10'>
                     {
-                        posts.map(post =>
-                            <Link to={post.url} key={post.id} className='flex justify-start items-start gap-10 hover:shadow-lg p-2'>
+                        posts.map((post, index) =>
+                            <Link to={post.url} key={index + 1} className='flex justify-start items-start gap-10 hover:shadow-lg p-2'>
                                 <div className='2/6'>
                                     <img src={post?.urlToImage} alt="" className='w-96 h-80' />
                                 </div>

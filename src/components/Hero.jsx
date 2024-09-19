@@ -13,7 +13,6 @@ const Hero = () => {
                 <div className="max-w-md">
                     <h1 className="mb-5 text-5xl font-bold uppercase">stylist picks beat
                         the heat</h1>
-
                     <Link to="/products" className="btn btn-primary">Shop Now</Link>
                 </div>
             </div>

@@ -55,7 +55,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user && isAuthenticated === true ? <UserOptions/> : <Link to="/login" className="btn">Login</Link>}
+                    {user && isAuthenticated === true ? <UserOptions /> : <Link to="/login" className="btn">Login</Link>}
                 </div>
             </div>
         </div>
