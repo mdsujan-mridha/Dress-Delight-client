@@ -9,6 +9,7 @@ import NewArival from '../components/NewArival';
 import TopSeller from '../components/TopSeller';
 
 const Home = () => {
+
     return (
         <div className='px-0'>
             <Hero />
@@ -50,8 +51,8 @@ const Home = () => {
                     </div>
                 </div>
                 <NewArival 
-                 from={6}
-                 to={10}
+                 from={0}
+                 to={4}
                  title={"Trending product"}
                  subTitle={"Explore our trending product!"}
                 />

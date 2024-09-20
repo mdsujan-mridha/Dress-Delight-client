@@ -35,10 +35,10 @@ export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], ca
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        let link = `http://localhost:5000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+        let link = `http://localhost:5000/api/v1/products`;
 
         if (category) {
-            link = `http://localhost:5000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`;
+            link = `http://localhost:5000/api/v1/products`;
         }
 
         const { data } = await axios.get(link);
