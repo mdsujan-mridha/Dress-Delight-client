@@ -1,5 +1,5 @@
 
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
@@ -15,7 +15,23 @@ import Login from './pages/Login';
 import Footer from './components/Footer';
 import 'react-tabs/style/react-tabs.css';
 import ProductCart from './pages/ProductCart';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import store from '../store';
+import { loadUser } from './redux/action/userAction';
+import ProtectedRoute from './utils/ProtectedRoute';
+
 function App() {
+
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  axios.defaults.withCredentials = true;
+
+
+  useEffect(() => {
+
+    store.dispatch(loadUser());
+
+  }, [])
 
 
   return (
@@ -33,7 +49,9 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           {/* this route will be protected  */}
-          <Route path='/cart' element={<ProductCart />}></Route>
+          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+            <Route path='/cart' element={<ProductCart />}></Route>
+          </Route>
         </Routes>
         <Toaster />
         <Footer />

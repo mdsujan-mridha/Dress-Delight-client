@@ -7,6 +7,8 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductDetails } from '../redux/action/productAction';
 import Loading from '../components/Loading';
+import { addItemToCart } from '../redux/action/cartAction';
+import toast from 'react-hot-toast';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -42,6 +44,12 @@ const ProductDetails = () => {
         handleImageChange(product?.image.url); // Call this function if needed
         handleModalOpen(); // Open the modal
     };
+
+    const addToCartHandler = () => {
+        dispatch(addItemToCart(id));
+        toast.success("Item added to cart");
+    }
+
     const sizes = ["S", "M", "L", "XL", "XXL"];
 
     return (
@@ -101,7 +109,10 @@ const ProductDetails = () => {
                                         </select>
                                     </div>
                                     <div className='mt-3'>
-                                        <button className='px-5 py-3 border rounded-md w-44 bg-accent text-white font-bold'> Add to Cart </button>
+                                        <button
+                                            className='px-5 py-3 border rounded-md w-44 bg-accent text-white font-bold'
+                                            onClick={addToCartHandler}
+                                        > Add to Cart </button>
                                     </div>
                                     <p className='font-regular text-md lato-light'> Category: {product?.category} </p>
                                     <p className='font-regular text-md lato-light'> Tags: {product?.tags} </p>

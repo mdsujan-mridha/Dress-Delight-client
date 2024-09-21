@@ -150,7 +150,6 @@ const Products = () => {
     const [view, setView] = useState('grid');
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
     const [val, setVal] = useState(MIN);
-
     const handleSubcategoryChange = (subcategory) => {
         let newSelectedSubcategories = [...selectedSubcategories];
         if (newSelectedSubcategories.includes(subcategory)) {

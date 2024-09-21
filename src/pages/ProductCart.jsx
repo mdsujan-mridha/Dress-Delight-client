@@ -1,6 +1,10 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProductCart = () => {
+    const dispatch = useDispatch();
+    const { cartItems } = useSelector((state) => state.cart);
+    console.log(cartItems);
     return (
         <div className="font-sans  max-md:max-w-xl mx-auto bg-white lg:w-full px-12 py-14">
             <h1 className="text-3xl font-bold text-gray-800 text-center">Shopping Cart</h1>

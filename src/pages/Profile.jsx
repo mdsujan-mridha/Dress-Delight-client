@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Profile = () => {
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-    console.log(user);
+    // console.log(user);
     return (
         <Stack className="bg-gray-100 flex items-center justify-center min-h-screen">
 

@@ -11,6 +11,7 @@ import {
     productsReducer,
     reviewReducer
 } from "./src/redux/reducer/productReducer";
+import { cartReducer } from "./src/redux/reducer/cartReducer";
 
 
 const reducer = combineReducers({
@@ -22,6 +23,7 @@ const reducer = combineReducers({
     review: reviewReducer,
     newProduct: newProductReducer,
     newReview: newReviewReducer,
+    cart:cartReducer
 });
 
 // initial satate 

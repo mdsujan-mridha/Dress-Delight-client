@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 
 const UserOptions = () => {
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-    console.log(user);
+    // console.log(user);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 

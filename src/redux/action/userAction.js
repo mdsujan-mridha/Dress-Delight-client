@@ -1,6 +1,9 @@
 import axios from "axios";
 import {
     CLEAR_ERRORS,
+    LOAD_USER_FAIL,
+    LOAD_USER_REQUEST,
+    LOAD_USER_SUCCESS,
     LOGIN_FAIL,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -41,7 +44,18 @@ export const register = (userData) => async (dispatch) => {
     }
 }
 
-
+// load user 
+export const loadUser = () => async (dispatch) => {
+    try {
+ 
+       dispatch({ type: LOAD_USER_REQUEST });
+       const { data } = await axios.get(`http://localhost:5000/api/v1/user/me`)
+       dispatch({ type: LOAD_USER_SUCCESS, payload: data.user })
+ 
+    } catch (error) {
+       dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message })
+    }
+ }
 
 
 
