@@ -17,14 +17,15 @@ const ProductDetails = () => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState('');
+    const[quantity,setQuantity] = useState(1);
 
     useEffect(() => {
         dispatch(getProductDetails(id))
     }, [dispatch, id]);
 
-    console.log(product);
+    
 
-    const ratingValue = product?.rating?.rate
+    
 
     // function for select product image 
     const handleImageChange = (image) => {
@@ -46,7 +47,7 @@ const ProductDetails = () => {
     };
 
     const addToCartHandler = () => {
-        dispatch(addItemToCart(id));
+        dispatch(addItemToCart(id,quantity));
         toast.success("Item added to cart");
     }
 

@@ -20,6 +20,7 @@ import axios from 'axios';
 import store from '../store';
 import { loadUser } from './redux/action/userAction';
 import ProtectedRoute from './utils/ProtectedRoute';
+import ShippingOrder from './pages/ShippingOrder';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
           {/* this route will be protected  */}
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
             <Route path='/cart' element={<ProductCart />}></Route>
+            <Route path='/shipping' element={<ShippingOrder />} />
           </Route>
         </Routes>
         <Toaster />
