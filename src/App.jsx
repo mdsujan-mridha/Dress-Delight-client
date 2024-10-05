@@ -21,6 +21,7 @@ import store from '../store';
 import { loadUser } from './redux/action/userAction';
 import ProtectedRoute from './utils/ProtectedRoute';
 import ShippingOrder from './pages/ShippingOrder';
+import ConfirmOrder from './pages/ConfirmOrder';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
             <Route path='/cart' element={<ProductCart />}></Route>
             <Route path='/shipping' element={<ShippingOrder />} />
+            <Route path='/confirm/order' element={<ConfirmOrder />} />
           </Route>
         </Routes>
         <Toaster />

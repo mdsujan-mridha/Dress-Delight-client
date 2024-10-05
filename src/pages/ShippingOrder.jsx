@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingInfo } from '../redux/action/cartAction';
 import bgImage from "../assets/Hero.png";
+import { useNavigate } from 'react-router-dom';
 
 const ShippingOrder = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     const { shippingInfo } = useSelector((state) => state.cart);
@@ -20,7 +22,7 @@ const ShippingOrder = () => {
         e.preventDefault();
         // console.log(formData);
         dispatch(saveShippingInfo({ address, state, country, phone }));
-
+        navigate("/confirm/order");
     }
 
     // console.log(shippingInfo);
@@ -34,12 +36,10 @@ const ShippingOrder = () => {
         width: '100%',
         backgroundSize: 'cover',
         // 
-      };
-
+    };
     return (
         <div
             style={backgroundStyle}
-           
         >
             <Container component={"main"} maxWidth="md" sx={{
                 display: 'flex',
@@ -47,7 +47,7 @@ const ShippingOrder = () => {
                 alignItems: 'center',
                 justifyContent: "center",
                 height: "100vh",
-                
+
             }}>
                 <Paper elevation={3} sx={{ padding: 5, display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <Typography variant='h5'> Shipping Details </Typography>
