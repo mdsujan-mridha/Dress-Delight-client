@@ -1,5 +1,5 @@
 
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
@@ -27,12 +27,18 @@ import Payment from './pages/Payment';
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeApiKey] = useState("");
   axios.defaults.withCredentials = true;
 
+  async function getStripKey() {
+    const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey")
+    console.log(data)
+  }
 
   useEffect(() => {
 
     store.dispatch(loadUser());
+    getStripKey();
 
   }, [])
 

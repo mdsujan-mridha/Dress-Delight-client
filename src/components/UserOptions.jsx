@@ -8,9 +8,12 @@ import { IoPerson } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/action/userAction';
+import toast from 'react-hot-toast';
 
 const UserOptions = () => {
+    const dispatch = useDispatch()
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     // console.log(user);
     const [open, setOpen] = useState(false);
@@ -21,7 +24,7 @@ const UserOptions = () => {
         { icon: <IoPerson />, name: "profile", func: profile },
         { icon: <FaShoppingCart />, name: "cart", func: shoppingCart },
         { icon: <MdDashboard />, name: "dashboard", func: dashboard },
-        { icon: <RiLogoutCircleRLine />, name: "logout", func: logout },
+        { icon: <RiLogoutCircleRLine />, name: "logout", func: logoutUser },
     ]
 
     function orders() {
@@ -33,8 +36,9 @@ const UserOptions = () => {
     function shoppingCart() {
         navigate("/cart")
     }
-    function logout() {
-        navigate("/")
+    function logoutUser() {
+        dispatch(logout())
+        toast.success("Logout success");
     }
     function dashboard() {
         navigate("/dashboard")
@@ -43,7 +47,7 @@ const UserOptions = () => {
     return (
         <Fragment>
             <SpeedDial
-                style={{ position: "absolute", top: 20}}
+                style={{ position: "absolute", top: 20 }}
                 ariaLabel="SpeedDial tooltip example"
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
