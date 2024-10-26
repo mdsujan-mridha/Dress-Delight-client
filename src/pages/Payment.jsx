@@ -1,26 +1,109 @@
 
-import React from 'react';
-
+import React, { useRef } from 'react';
+import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { createOrder } from '../redux/action/orderAction';
 const Payment = () => {
+    const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+    const payBtn = useRef(null);
+    const dispatch = useDispatch();
+    const stripe = useStripe();
+    const element = useElements();
+    const navigate = useNavigate();
+
+    const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+    const { user } = useSelector((state) => state.user);
+    const paymentData = { amount: Math.round(orderInfo.totalPrice * 100) }
+
+    // order info 
+    const order = {
+        shippingInfo: shippingInfo,
+        orderItems: cartItems,
+        itemPrice: orderInfo.subtotal,
+        taxPrice: orderInfo.tax,
+        shippingPrice: orderInfo.shippingPrice,
+        totalPrice: orderInfo.totalPrice,
+    }
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        payBtn.current.disable = true;
+
+        try {
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+            };
+
+            const { data } = await axios.post("http://localhost:5000/api/v1/payment/process", paymentData, config)
+            const client_secret = data.client_secret;
+            if (!stripe || !element) return;
+            const result = await stripe.confirmCardPayment(client_secret, {
+                payment_method: {
+                    card: element.getElement(CardNumberElement),
+                    billing_details: {
+                        name: user.name,
+                        email: user.email,
+                        address: {
+                            line1: shippingInfo.address,
+                            city: shippingInfo?.city,
+                            state: shippingInfo?.state,
+                            postal_code: shippingInfo?.picCode,
+                            country: shippingInfo?.country
+                        }
+                    }
+                }
+            })
+            if (result.error) {
+                payBtn.current.disable = false;
+                toast.error(result.error.message)
+            } else {
+                if (result.paymentIntent.status === "succeeded") {
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    }
+                    dispatch(createOrder(order));
+                    navigate("/success");
+                } else {
+                    toast.error("There is some issue while payment")
+                }
+            }
+
+        } catch (error) {
+            payBtn.current.disable = false;
+            toast.error(error.response.data.message)
+        }
+
+
+    }
+
+
+    // console.log(shippingInfo);
+    // console.log(orderInfo);
+
+
     return (
-        <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+        <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 min-h-screen">
             <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
                 <div className="mx-auto max-w-5xl">
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Payment</h2>
 
                     <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
-                        <form action="#" className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
+                        <form
+                            onSubmit={(e) => submitHandler(e)}
+                            className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
                             <div className="mb-6 grid grid-cols-2 gap-4">
                                 <div className="col-span-2 sm:col-span-1">
-                                    <label htmlFor="full_name" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Full name (as displayed on card)* </label>
-                                    <input type="text" id="full_name" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Bonnie Green" required />
-                                </div>
-
-                                <div className="col-span-2 sm:col-span-1">
                                     <label htmlFor="card-number-input" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Card number* </label>
-                                    <input type="text" id="card-number-input" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="xxxx-xxxx-xxxx-xxxx" pattern="^4[0-9]{12}(?:[0-9]{3})?$" required />
+                                    <CardNumberElement className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="xxxx-xxxx-xxxx-xxxx" />
                                 </div>
-
                                 <div>
                                     <label htmlFor="card-expiration-input" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Card expiration* </label>
                                     <div className="relative">
@@ -33,7 +116,7 @@ const Payment = () => {
                                                 />
                                             </svg>
                                         </div>
-                                        <input  type="text" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="12/23" required />
+                                        <CardExpiryElement className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" />
                                     </div>
                                 </div>
                                 <div>
@@ -49,10 +132,10 @@ const Payment = () => {
                                             <div className="tooltip-arrow" data-popper-arrow></div>
                                         </div>
                                     </label>
-                                    <input type="number" id="cvv-input" aria-describedby="helper-text-explanation" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="•••" required />
+                                    <CardCvcElement aria-describedby="helper-text-explanation" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
                                 </div>
                             </div>
-                            <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Pay now</button>
+                            <input type="submit" value={`Pay ${orderInfo && orderInfo.totalPrice}`} ref={payBtn} className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white bg-accent hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"></input>
                         </form>
                         <div className="mt-6 grow sm:mt-8 lg:mt-0">
                             <div className="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
@@ -95,7 +178,7 @@ const Payment = () => {
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div>
         </section>

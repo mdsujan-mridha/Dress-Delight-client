@@ -23,6 +23,9 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import ShippingOrder from './pages/ShippingOrder';
 import ConfirmOrder from './pages/ConfirmOrder';
 import Payment from './pages/Payment';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import Success from './pages/Success';
 
 function App() {
 
@@ -31,7 +34,8 @@ function App() {
   axios.defaults.withCredentials = true;
 
   async function getStripKey() {
-    const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey")
+    const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
+    setStripeApiKey(data.stripeApiKey);
     console.log(data)
   }
 
@@ -62,7 +66,21 @@ function App() {
             <Route path='/cart' element={<ProductCart />}></Route>
             <Route path='/shipping' element={<ShippingOrder />} />
             <Route path='/confirm/order' element={<ConfirmOrder />} />
-            <Route path='/process/payment' element={<Payment />} />
+            <Route>
+              {
+                stripeApiKey && (
+                  <Route path='/process/payment'
+                    element={
+                      <Elements stripe={loadStripe(stripeApiKey)}>
+                        <Payment stripeApiKey={stripeApiKey} />
+                      </Elements>
+                    }
+                  >
+                  </Route>
+                )
+              }
+            </Route>
+            <Route path='/success' element={<Success />} />
           </Route>
         </Routes>
         <Toaster />
