@@ -26,6 +26,7 @@ import Payment from './pages/Payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Success from './pages/Success';
+import Orders from './user/Orders';
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
             <Route path='/cart' element={<ProductCart />}></Route>
             <Route path='/shipping' element={<ShippingOrder />} />
             <Route path='/confirm/order' element={<ConfirmOrder />} />
+            <Route path='/orders' element={<Orders />} />
             <Route>
               {
                 stripeApiKey && (
