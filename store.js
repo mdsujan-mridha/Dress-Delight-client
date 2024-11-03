@@ -12,6 +12,7 @@ import {
     reviewReducer
 } from "./src/redux/reducer/productReducer";
 import { cartReducer } from "./src/redux/reducer/cartReducer";
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "./src/redux/reducer/orderReducer";
 
 
 const reducer = combineReducers({
@@ -23,7 +24,13 @@ const reducer = combineReducers({
     review: reviewReducer,
     newProduct: newProductReducer,
     newReview: newReviewReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    order: orderReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
+    orderDetails: orderDetailsReducer,
+    allOrders: allOrdersReducer,
+
 });
 
 // initial satate 

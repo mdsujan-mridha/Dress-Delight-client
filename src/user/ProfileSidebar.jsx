@@ -4,12 +4,14 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { FaUser, FaList,FaEdit  } from "react-icons/fa";
+import { FaUser, FaList, FaEdit } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import { FaMessage } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
 
-const ProfileSidebar = ({ user }) => {
-    console.log(user)
+const ProfileSidebar = () => {
+    const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     return (
         <>
             <div className='flex flex-col gap-5 rounded-md min-h-screen bg-blue-900 shadow-xl items-start px-2'>
@@ -35,7 +37,11 @@ const ProfileSidebar = ({ user }) => {
                         <IoMdSettings className='text-2xl text-white' />
                         <h1 className='text-2xl text-white text-center'> Setting </h1>
                     </Link>
-                    <Link  className='text-center flex gap-5  items-center justify-start'>
+                    <Link to="/setting" className='text-center flex gap-5  items-center justify-start'>
+                        <FaMessage className='text-2xl text-white' />
+                        <h1 className='text-2xl text-white text-center'> Message </h1>
+                    </Link>
+                    <Link className='text-center flex gap-5  items-center justify-start'>
                         <RiLogoutCircleRLine className='text-2xl text-white' />
                         <h1 className='text-2xl text-white text-center'> Logout </h1>
                     </Link>

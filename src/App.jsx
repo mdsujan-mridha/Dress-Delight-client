@@ -60,10 +60,11 @@ function App() {
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/profile' element={<Profile />} />
+
           <Route path='/product/:id' element={<ProductDetails />} />
           {/* this route will be protected  */}
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+            <Route path='/profile' element={<Profile />} />
             <Route path='/cart' element={<ProductCart />}></Route>
             <Route path='/shipping' element={<ShippingOrder />} />
             <Route path='/confirm/order' element={<ConfirmOrder />} />
