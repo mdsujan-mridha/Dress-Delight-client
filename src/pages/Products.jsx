@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Card from "../components/Card";
 import { FaTh, FaBars } from 'react-icons/fa';
 import { Slider, } from '@mui/material';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getProduct } from '../redux/action/productAction';
 import Loading from '../components/Loading';
