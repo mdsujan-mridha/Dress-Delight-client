@@ -41,7 +41,7 @@ const UserOptions = () => {
         toast.success("Logout success");
     }
     function dashboard() {
-        navigate("/dashboard")
+        navigate("/admin/dashboard")
     }
 
     return (

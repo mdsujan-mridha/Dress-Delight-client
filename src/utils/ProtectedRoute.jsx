@@ -6,7 +6,7 @@
 import React from 'react';
 
 
-import { Navigate,Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = ({
   isAuthenticated,
@@ -14,16 +14,16 @@ const ProtectedRoute = ({
   adminRoute,
   isAdmin,
   redirect = "/login",
-  redirectAdmin = "/account",
-  
-})=>{
-   if(isAuthenticated === false){
+  redirectAdmin = "/profile",
+
+}) => {
+  if (isAuthenticated === false) {
     return <Navigate to={redirect} />
-   }
-   if(adminRoute && !isAdmin){
-    return <Navigate  to={redirectAdmin}/>
-   }
-   return children ? children : <Outlet/>
+  }
+  if (adminRoute && !isAdmin) {
+    return <Navigate to={redirectAdmin} />
+  }
+  return children ? children : <Outlet />
 }
 
 export default ProtectedRoute;

@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
-import { userReducer } from "./src/redux/reducer/userReducer";
+import { allUserReducer, profileReducer, userReducer } from "./src/redux/reducer/userReducer";
 import { thunk } from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import {
@@ -17,6 +17,7 @@ import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer
 
 const reducer = combineReducers({
     user: userReducer,
+    allUsers:allUserReducer,
     products: productsReducer,
     productDetails: productDetailsReducer,
     product: productReducer,
@@ -30,6 +31,7 @@ const reducer = combineReducers({
     myOrders: myOrdersReducer,
     orderDetails: orderDetailsReducer,
     allOrders: allOrdersReducer,
+    profile: profileReducer,
 
 });
 

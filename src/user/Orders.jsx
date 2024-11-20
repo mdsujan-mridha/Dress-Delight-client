@@ -90,8 +90,7 @@ const Orders = () => {
                 <ProfileSidebar />
             </div>
             <div className='w-full md:w-3/4 lg:w-3/4'>
-                <h1 className='text-center font-bold text-3xl text-white border-b-2'> Welcome to Order page </h1>
-
+                <h1 className='text-center font-bold text-3xl text-white border-b-2 pb-5'> Welcome to Order page </h1>
                 {
                     loading ? (<Loading />)
                         :

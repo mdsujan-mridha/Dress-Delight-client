@@ -27,6 +27,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Success from './pages/Success';
 import Orders from './user/Orders';
+import Setting from './user/Setting';
+import Dashboard from './admin/pages/Dashboard';
 
 function App() {
 
@@ -69,6 +71,7 @@ function App() {
             <Route path='/shipping' element={<ShippingOrder />} />
             <Route path='/confirm/order' element={<ConfirmOrder />} />
             <Route path='/orders' element={<Orders />} />
+            <Route path='/setting' element={<Setting />} />
             <Route>
               {
                 stripeApiKey && (
@@ -85,6 +88,18 @@ function App() {
             </Route>
             <Route path='/success' element={<Success />} />
           </Route>
+
+          {/* admin route */}
+          <Route path='/admin/dashboard'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <Dashboard />
+            </ProtectedRoute>}
+          />
+
         </Routes>
         <Toaster />
         <Footer />

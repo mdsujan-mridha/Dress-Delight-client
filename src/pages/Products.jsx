@@ -62,7 +62,7 @@ const Products = () => {
                     (<Loading />)
                     :
                     (<>
-                        <div className='flex gap-10 min-h-screen px-12 pt-12'>
+                        <div className='flex gap-10 min-h-screen px-12 pt-12 pb-14'>
                             <div className='w-1/4 bg-slate-100 rounded-t-lg px-5'>
                                 <button onClick={resetFilter} className='w-full h-12 bg-accent mt-12 rounded-md text-white text-xl'>Rest</button>
                                 <input
