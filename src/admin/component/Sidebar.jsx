@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
+
 import "../style/style.css";
 
 
 import { useSelector } from 'react-redux';
 import { FaEdit,FaUsers } from 'react-icons/fa';
-import { FaMessage } from 'react-icons/fa6';
+
 import { RiLogoutCircleRLine } from 'react-icons/ri'; 
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdAddToPhotos,MdOutlinePreview  } from "react-icons/md";
@@ -25,7 +25,7 @@ const Sidebar = () => {
             </div>
 
             <div className='flex flex-col  gap-5 items-start'>
-                <Link to="/profile" className='text-center flex gap-5  items-center justify-start'>
+                <Link to="/admin/products" className='text-center flex gap-5  items-center justify-start'>
                     <AiOutlineProduct className='text-2xl text-white' />
                     <h1 className='text-2xl text-white text-center'> All Products </h1>
                 </Link>

@@ -29,6 +29,7 @@ import Success from './pages/Success';
 import Orders from './user/Orders';
 import Setting from './user/Setting';
 import Dashboard from './admin/pages/Dashboard';
+import AllProducts from './admin/pages/AllProducts';
 
 function App() {
 
@@ -99,6 +100,21 @@ function App() {
               <Dashboard />
             </ProtectedRoute>}
           />
+          {/* product list  */}
+
+          <Route path='/admin/products'
+
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <AllProducts />
+            </ProtectedRoute>}
+
+          >
+
+          </Route>
 
         </Routes>
         <Toaster />
