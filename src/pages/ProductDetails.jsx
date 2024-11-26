@@ -17,7 +17,7 @@ const ProductDetails = () => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState('');
-    const[quantity,setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         dispatch(getProductDetails(id))
@@ -43,11 +43,12 @@ const ProductDetails = () => {
     };
 
     const addToCartHandler = () => {
-        dispatch(addItemToCart(id,quantity));
+        dispatch(addItemToCart(id, quantity));
         toast.success("Item added to cart");
     }
 
     const sizes = ["S", "M", "L", "XL", "XXL"];
+    // console.log(product.image)
 
     return (
         <Fragment>

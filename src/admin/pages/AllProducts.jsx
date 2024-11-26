@@ -19,7 +19,7 @@ const AllProducts = () => {
     const navigate = useNavigate();
 
     const deleteProduct = (id) => {
-
+        dispatch(deleteProduct(id));
     }
 
     useEffect(() => {

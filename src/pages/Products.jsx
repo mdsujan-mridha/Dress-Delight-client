@@ -9,14 +9,14 @@ import toast from 'react-hot-toast';
 
 
 const categories = [
-    "Laptops",
-    "Desktops",
-    "Monitors",
-    "Networking Devices",
-    "Computer Components",
-    "Printers & Ink",
-    "Storage Devices",
-    "Computer Accessories"
+    "Laptop",
+    "Footwear",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
+    "Electronic"
 ]
 
 const Products = () => {

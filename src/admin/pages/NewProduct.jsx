@@ -30,6 +30,7 @@ const NewProduct = () => {
         "Attire",
         "Camera",
         "SmartPhones",
+        "Electronic"
     ];
     // new product handler 
     const createProductSubmitHandler = (e) => {

@@ -33,7 +33,7 @@ const Sidebar = () => {
                     <MdAddToPhotos  className='text-2xl text-white' />
                     <h1 className='text-2xl text-white text-center'> New Products </h1>
                 </Link>
-                <Link to="/update" className='text-center flex gap-5  items-center justify-start'>
+                <Link to="/admin/all-orders" className='text-center flex gap-5  items-center justify-start'>
                     <FaEdit className='text-2xl text-white' />
                     <h1 className='text-2xl text-white text-center'> Orders </h1>
                 </Link>
