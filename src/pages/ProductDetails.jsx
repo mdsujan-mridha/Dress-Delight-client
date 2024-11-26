@@ -17,15 +17,11 @@ const ProductDetails = () => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState('');
-    const[quantity,setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         dispatch(getProductDetails(id))
     }, [dispatch, id]);
-
-    
-
-    
 
     // function for select product image 
     const handleImageChange = (image) => {
@@ -47,11 +43,12 @@ const ProductDetails = () => {
     };
 
     const addToCartHandler = () => {
-        dispatch(addItemToCart(id,quantity));
+        dispatch(addItemToCart(id, quantity));
         toast.success("Item added to cart");
     }
 
     const sizes = ["S", "M", "L", "XL", "XXL"];
+    // console.log(product.image)
 
     return (
         <Fragment>
@@ -61,7 +58,7 @@ const ProductDetails = () => {
                     :
                     (<Fragment>
                         <div className='min-h-screen px-12 w-full pt-24 mb-14'>
-                            <div className="flex h-96 justify-between items-center gap-5">
+                            <div className="flex h-auto justify-between items-center gap-5">
                                 <div style={{ width: "600px", height: "600px", objectFit: "contain", marginTop: "50px" }} className='border-2'>
                                     <Carousel style={{ width: "600px", height: "600px", objectFit: "cover" }}>
                                         {
@@ -141,7 +138,7 @@ const ProductDetails = () => {
                                     </TransformWrapper>
                                 </DialogContent>
                             </Dialog>
-                            <div className='mt-72'>
+                            <div className='mt-72 h-auto'>
                                 <Tabs>
                                     <TabList>
                                         <Tab>Description</Tab>

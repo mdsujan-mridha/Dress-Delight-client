@@ -14,11 +14,11 @@ const Home = () => {
         <div className='px-0'>
             <Hero />
             <div className='px-12'>
-                <NewArival 
-                from={0}
-                to={4}
-                title={"Discover NEW Arrivals"}
-                subTitle={"Recently added shirts!"}
+                <NewArival
+                    from={0}
+                    to={4}
+                    title={"Discover NEW Arrivals"}
+                    subTitle={"Recently added shirts!"}
                 />
                 <div className='py-12 flex justify-between items-center'>
                     <div className='flex justify-between gap-5 p-5 hover:shadow-md'>
@@ -29,7 +29,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className='flex justify-between gap-5 p-5 hover:shadow-md'>
-                        <div><BiSupport  size={35} color='#024E82' /></div>
+                        <div><BiSupport size={35} color='#024E82' /></div>
                         <div>
                             <h4 className="text-md uppercase  lato-bold">SUPPORT 24/7</h4>
                             <p>Our support team is there <br /> to help you for queries</p>
@@ -50,11 +50,11 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <NewArival 
-                 from={0}
-                 to={4}
-                 title={"Trending product"}
-                 subTitle={"Explore our trending product!"}
+                <NewArival
+                    from={0}
+                    to={4}
+                    title={"Trending product"}
+                    subTitle={"Explore our trending product!"}
                 />
                 <div className='flex justify-between items-center pb-12 gap-5'>
                     <div className='bg-secondary h-96 w-1/2 flex justify-center items-center flex-col gap-5'>
@@ -68,7 +68,13 @@ const Home = () => {
                         <button className='text-secondary w-40 h-14 bg-primary hover:bg-transparent hover:border-2 hover:text-primary'>buy now</button>
                     </div>
                 </div>
-                <TopSeller />
+                <TopSeller
+
+                    from={6}
+                    to={9}
+                    title={"To Seller Products"}
+                    subTitle={"Explore our trending product!"}
+                />
             </div>
         </div>
     );

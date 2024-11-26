@@ -13,14 +13,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import "../style/style.css";
 
 const AllProducts = () => {
-
     const dispatch = useDispatch();
     const { error, loading, products } = useSelector((state) => state.products);
 
     const navigate = useNavigate();
 
     const deleteProduct = (id) => {
-
+        dispatch(deleteProduct(id));
     }
 
     useEffect(() => {

@@ -1,25 +1,52 @@
-import React from 'react';
+import React, { Fragment, useEffect } from 'react';
 import fakeData from '../utils/fakeData';
 import ProductCard from './ProductCard';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { clearErrors, getProduct } from '../redux/action/productAction';
+import Loading from './Loading';
 
-const TopSeller = () => {
-    const products = fakeData.topSellers
+const TopSeller = ({ from, to, title, subTitle }) => {
+    // console.log(fakeData.products);
+    const dispatch = useDispatch();
+    const { products, loading, error } = useSelector((state) => state.products);
+    // console.log(products);
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors())
+        }
+        dispatch(getProduct())
+
+    }, [dispatch, error]);
+
+    const homeProducts = products.slice(from, to)
     return (
-        <div>
-            <h1 className='pt-12 text-center font-semibold text-4xl'> Top Sellers </h1>
-            <p className='text-center font-medium text-lg pt-2'> Browse our top-selling products </p>
-            <div className='py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                {
-                    products &&
-                    products.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                        />
-                    ))
-                }
-            </div>
-        </div>
+        <Fragment>
+            {
+                loading ?
+                    (<Loading />)
+                    :
+                    (<>
+                        <div>
+                            <h1 className='pt-12 text-center font-semibold text-4xl'> {title} </h1>
+                            <p className='text-center font-medium text-lg pt-2'> {subTitle} </p>
+                            <div className='py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+                                {
+                                    homeProducts &&
+                                    homeProducts.map((product) => (
+                                        <ProductCard
+                                            key={product._id}
+                                            product={product}
+                                        />
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </>)
+            }
+        </Fragment>
     );
 };
 

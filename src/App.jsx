@@ -30,6 +30,8 @@ import Orders from './user/Orders';
 import Setting from './user/Setting';
 import Dashboard from './admin/pages/Dashboard';
 import AllProducts from './admin/pages/AllProducts';
+import NewProduct from './admin/pages/NewProduct';
+import OrderList from './admin/pages/OrderList';
 
 function App() {
 
@@ -103,7 +105,6 @@ function App() {
           {/* product list  */}
 
           <Route path='/admin/products'
-
             element={<ProtectedRoute
               isAuthenticated={isAuthenticated}
               adminRoute={true}
@@ -113,7 +114,32 @@ function App() {
             </ProtectedRoute>}
 
           >
+          </Route>
+          {/* New product */}
 
+          <Route path='/admin/new-product'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <NewProduct />
+            </ProtectedRoute>}
+
+          >
+          </Route>
+
+          {/* order list  */}
+          <Route path='/admin/all-orders'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <OrderList />
+            </ProtectedRoute>}
+
+          >
           </Route>
 
         </Routes>
