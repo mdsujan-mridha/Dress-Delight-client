@@ -23,9 +23,15 @@ const UserOptions = () => {
         { icon: <FaList />, name: "Orders", func: orders },
         { icon: <IoPerson />, name: "profile", func: profile },
         { icon: <FaShoppingCart />, name: "cart", func: shoppingCart },
-        { icon: <MdDashboard />, name: "dashboard", func: dashboard },
         { icon: <RiLogoutCircleRLine />, name: "logout", func: logoutUser },
-    ]
+    ];
+    if (user.role === "admin") {
+        options.unshift({
+            icon: <MdDashboard />,
+            name: "Dashboard",
+            func: dashboard
+        })
+    }
 
     function orders() {
         navigate("/orders")
