@@ -19,7 +19,7 @@ const About = () => {
                 </div>
                 <div className='pt-12'>
                     <h1 className='text-center font-semibold text-3xl py-10 lato-bold'> The Founders </h1>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto'>
                         {
                             Fiunders &&
                             Fiunders.map((founder) => (

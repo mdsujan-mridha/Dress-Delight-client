@@ -113,6 +113,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
 
     try {
         dispatch({ type: UPDATE_ORDER_REQUEST })
+        // console.log("Console log from action :",order)
         const { data } = await axios.put(`http://localhost:5000/api/v1/admin/order/${id}`, order);
         dispatch({
             type: UPDATE_ORDER_SUCCESS,

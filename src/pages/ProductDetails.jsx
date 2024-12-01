@@ -1,27 +1,45 @@
-import { Dialog, DialogContent, Rating } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Rating, TextField } from '@mui/material';
 import React, { Fragment, useEffect, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { useParams } from 'react-router-dom';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetails } from '../redux/action/productAction';
+import { clearErrors, getProductDetails, newReview } from '../redux/action/productAction';
 import Loading from '../components/Loading';
 import { addItemToCart } from '../redux/action/cartAction';
 import toast from 'react-hot-toast';
+import { NEW_REVIEW_REQUEST } from '../redux/constant/productConstant';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
-    const { product, loading, error } = useSelector((state) => state.productDetails)
+    const { product, loading, error } = useSelector((state) => state.productDetails);
+    const { success, error: reviewError } = useSelector((state) => state.newReview);
     const { id } = useParams();
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const [open, setOpen] = useState(false);
+    const [comment, setComment] = useState("");
+    const [rating, setRating] = useState(0);
 
     useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors())
+        }
+        if (reviewError) {
+            toast.error(reviewError);
+            dispatch(clearErrors())
+        }
+        if (success) {
+            toast.success('Review submitted successfully');
+            dispatch({ type: NEW_REVIEW_REQUEST })
+        }
+
         dispatch(getProductDetails(id))
-    }, [dispatch, id]);
+    }, [dispatch, id, error, reviewError, success]);
 
     // function for select product image 
     const handleImageChange = (image) => {
@@ -46,6 +64,22 @@ const ProductDetails = () => {
         dispatch(addItemToCart(id, quantity));
         toast.success("Item added to cart");
     }
+
+    // review handler 
+    const submitReviewToggle = () => {
+        open ? setOpen(false) : setOpen(true);
+    }
+    const reviewSubmitHandler = () => {
+        const myForm = new FormData();
+
+        myForm.append("rating", rating);
+        myForm.append("comment", comment);
+        myForm.append("productId", id);
+        dispatch(newReview(myForm));
+        setOpen(false);
+
+    }
+
 
     const sizes = ["S", "M", "L", "XL", "XXL"];
     // console.log(product.image)
@@ -114,6 +148,11 @@ const ProductDetails = () => {
                                     </div>
                                     <p className='font-regular text-md lato-light'> Category: {product?.category} </p>
                                     <p className='font-regular text-md lato-light'> Tags: {product?.tags} </p>
+
+                                    <button
+                                        className='px-5 py-3 border rounded-md w-44 bg-accent text-white font-bold'
+                                        onClick={submitReviewToggle}
+                                    > Submit Review </button>
                                 </div>
                             </div>
                             <Dialog
@@ -138,6 +177,42 @@ const ProductDetails = () => {
                                     </TransformWrapper>
                                 </DialogContent>
                             </Dialog>
+                            {/* review submit  */}
+                            <Dialog
+                                aria-labelledby='simple-dialog-title'
+                                open={open}
+                                onClose={submitReviewToggle}
+                            >
+
+                                <DialogTitle>Submit Review</DialogTitle>
+                                <DialogContent className="submitDialog">
+                                    <Rating
+                                        onChange={(e) => setRating(e.target.value)}
+                                        value={rating}
+                                        size="large"
+                                    />
+
+                                    <TextField
+                                        required
+                                        label="Review"
+                                        variant="outlined"
+                                        fullWidth
+                                        margin='normal'
+                                        type="text"
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                    ></TextField>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={submitReviewToggle} color="secondary">
+                                        Cancel
+                                    </Button>
+                                    <Button onClick={reviewSubmitHandler} color="primary">
+                                        Submit
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+
                             <div className='mt-72 h-auto'>
                                 <Tabs>
                                     <TabList>
