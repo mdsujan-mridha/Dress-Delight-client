@@ -33,6 +33,7 @@ import AllProducts from './admin/pages/AllProducts';
 import NewProduct from './admin/pages/NewProduct';
 import OrderList from './admin/pages/OrderList';
 import ProcessOrder from './admin/pages/ProcessOrder';
+import UpdateProduct from './admin/pages/UpdateProduct';
 
 function App() {
 
@@ -153,6 +154,19 @@ function App() {
                 isAdmin={user?.role === "admin" ? true : false}
               >
                 <ProcessOrder />
+              </ProtectedRoute>
+            }
+          ></Route>
+          {/* update product  */}
+          <Route
+            path="/admin/product/:id"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <UpdateProduct />
               </ProtectedRoute>
             }
           ></Route>
