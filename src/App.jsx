@@ -32,6 +32,7 @@ import Dashboard from './admin/pages/Dashboard';
 import AllProducts from './admin/pages/AllProducts';
 import NewProduct from './admin/pages/NewProduct';
 import OrderList from './admin/pages/OrderList';
+import ProcessOrder from './admin/pages/ProcessOrder';
 
 function App() {
 
@@ -141,6 +142,20 @@ function App() {
 
           >
           </Route>
+
+          {/* process order by admin  */}
+          <Route
+            path="/admin/order/:id"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <ProcessOrder />
+              </ProtectedRoute>
+            }
+          ></Route>
 
         </Routes>
         <Toaster />

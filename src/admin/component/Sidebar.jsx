@@ -1,20 +1,12 @@
 
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import "../style/style.css";
-
-
 import { useSelector } from 'react-redux';
 import { FaEdit,FaUsers } from 'react-icons/fa';
-
 import { RiLogoutCircleRLine } from 'react-icons/ri'; 
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdAddToPhotos,MdOutlinePreview  } from "react-icons/md";
-
-
-
 const Sidebar = () => {
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     return (

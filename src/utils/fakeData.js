@@ -91,24 +91,20 @@ const topSellers = [
 const Founder = [
     {
         id: 1,
-        name: "HM Jawad",
-        image: "https://i.ibb.co/0nfmySZ/Rectangle-8-3.png"
+        name: "Md Rony Ahmed",
+        image: "https://i.ibb.co.com/9YJM3kn/vector-users-icon.jpg"
     },
     {
         id: 2,
-        name: "Furqan Abid",
-        image: "https://i.ibb.co/QbffGTn/Rectangle-8.png"
+        name: "Md Sabbir Ahmed",
+        image: "https://i.ibb.co.com/9YJM3kn/vector-users-icon.jpg"
     },
     {
         id: 3,
-        name: "Abdullah Ah",
-        image: "https://i.ibb.co/DfM5Q1Q/Rectangle-8-2.png"
+        name: "Meherun Nessa",
+        image: "https://i.ibb.co.com/0ZhgShL/female-296990-1280.png"
     },
-    {
-        id: 4,
-        name: "Abrar Khan",
-        image: "https://i.ibb.co/1GfXRKt/Rectangle-8-1.png"
-    }
+    
 ]
 
 const reviews = [
