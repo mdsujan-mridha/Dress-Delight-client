@@ -239,9 +239,10 @@ export const updateUser = (id, userData) => async (dispatch) => {
 export const getUserDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: USER_DETAILS_REQUEST });
-        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/user/${id}`);
-
-        dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
+        const  {data}  = await axios.get(`http://localhost:5000/api/v1/admin/user/${id}`);
+        // console.log("user from user action", data)
+        dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user});
+        
     } catch (error) {
         dispatch({ type: USER_DETAILS_FAIL, payload: error.response.data.message });
     }

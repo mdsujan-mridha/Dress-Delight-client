@@ -34,13 +34,15 @@ import NewProduct from './admin/pages/NewProduct';
 import OrderList from './admin/pages/OrderList';
 import ProcessOrder from './admin/pages/ProcessOrder';
 import UpdateProduct from './admin/pages/UpdateProduct';
+import UserList from './admin/pages/UserList';
+import UpdateUser from './admin/pages/UpdateUser';
+import ProductReview from './admin/pages/ProductReview';
 
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
   axios.defaults.withCredentials = true;
-
   async function getStripKey() {
     const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
@@ -48,16 +50,13 @@ function App() {
   }
 
   useEffect(() => {
-
     store.dispatch(loadUser());
     getStripKey();
 
   }, [])
 
-
   return (
     <Fragment>
-
       <Router>
         <Navbar />
         <Routes>
@@ -67,7 +66,6 @@ function App() {
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login />} />
-
           <Route path='/product/:id' element={<ProductDetails />} />
           {/* this route will be protected  */}
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
@@ -93,7 +91,6 @@ function App() {
             </Route>
             <Route path='/success' element={<Success />} />
           </Route>
-
           {/* admin route */}
           <Route path='/admin/dashboard'
             element={<ProtectedRoute
@@ -105,7 +102,6 @@ function App() {
             </ProtectedRoute>}
           />
           {/* product list  */}
-
           <Route path='/admin/products'
             element={<ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -114,11 +110,9 @@ function App() {
             >
               <AllProducts />
             </ProtectedRoute>}
-
           >
           </Route>
           {/* New product */}
-
           <Route path='/admin/new-product'
             element={<ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -127,10 +121,8 @@ function App() {
             >
               <NewProduct />
             </ProtectedRoute>}
-
           >
           </Route>
-
           {/* order list  */}
           <Route path='/admin/all-orders'
             element={<ProtectedRoute
@@ -140,10 +132,8 @@ function App() {
             >
               <OrderList />
             </ProtectedRoute>}
-
           >
           </Route>
-
           {/* process order by admin  */}
           <Route
             path="/admin/order/:id"
@@ -169,6 +159,39 @@ function App() {
                 <UpdateProduct />
               </ProtectedRoute>
             }
+          ></Route>
+          {/* user list ================= */}
+          <Route path='/admin/users'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <UserList />
+            </ProtectedRoute>}
+          >
+          </Route>
+          {/* user list ================= */}
+          <Route path='/admin/user/:id'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <UpdateUser />
+            </ProtectedRoute>}
+          >
+          </Route>
+          <Route
+            path='/admin/reviews'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <ProductReview />
+            </ProtectedRoute>}
+
           ></Route>
 
         </Routes>
