@@ -31,14 +31,14 @@ import {
 } from "../constant/productConstant";
 
 
-export const getProduct = (keyword = '', price = [10, 25000], category) => async (dispatch) => {
+export const getProduct = (keyword = '', price = [10, 25000], category,currentPage=1) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        let link = `http://localhost:5000/api/v1/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+        let link = `https://dress-light-server.vercel.app/api/v1/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&page=${currentPage}`;
 
         if (category) {
-            link = `http://localhost:5000/api/v1/products?keyword=${keyword}&category=${category}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+            link = `https://dress-light-server.vercel.app/api/v1/products?keyword=${keyword}&category=${category}&price[gte]=${price[0]}&price[lte]=${price[1]}&page=${currentPage}`;
         }
 
         const { data } = await axios.get(link);
@@ -61,7 +61,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/product/${id}`);
+        const { data } = await axios.get(`https://dress-light-server.vercel.app/api/v1/product/${id}`);
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -86,7 +86,7 @@ export const newReview = (reviewData) => async (dispatch) => {
         const config = {
             headers: { "Content-Type": "application/json" }
         };
-        const data = await axios.put(`http://localhost:5000/api/v1/review`, reviewData, config);
+        const data = await axios.put(`https://dress-light-server.vercel.app/api/v1/review`, reviewData, config);
         dispatch({
             type: NEW_REVIEW_SUCCESS,
             payload: data.success
@@ -105,7 +105,7 @@ export const getAdminProduct = () => async (dispatch) => {
 
     try {
         dispatch({ type: ADMIN_PRODUCT_REQUEST })
-        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/products`)
+        const { data } = await axios.get(`https://dress-light-server.vercel.app/api/v1/admin/products`)
         dispatch({
             type: ADMIN_PRODUCT_SUCCESS,
             payload: data.products,
@@ -128,7 +128,7 @@ export const deleteProduct = (id) => async (dispatch) => {
         dispatch({
             type: DELETE_PRODUCT_REQUEST
         })
-        const { data } = await axios.delete(`http://localhost:5000/api/v1/admin/product/${id}`)
+        const { data } = await axios.delete(`https://dress-light-server.vercel.app/api/v1/admin/product/${id}`)
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
             payload: data.success
@@ -153,7 +153,7 @@ export const createProduct = (productData) => async (dispatch) => {
             }
         }
         // console.log(productData);
-        const data = await axios.post(`http://localhost:5000/api/v1/admin/product/new`, productData, config)
+        const data = await axios.post(`https://dress-light-server.vercel.app/api/v1/admin/product/new`, productData, config)
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
             payload: data
@@ -164,12 +164,11 @@ export const createProduct = (productData) => async (dispatch) => {
             payload: error.response?.data.message
         })
     }
-
 }
 export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PRODUCT_REQUEST })
-        const { data } = await axios.put(`http://localhost:5000/api/v1/admin/product/${id}`, productData)
+        const { data } = await axios.put(`https://dress-light-server.vercel.app/api/v1/admin/product/${id}`, productData)
         dispatch({
             type: UPDATE_PRODUCT_SUCCESS,
             payload: data.success,
@@ -185,7 +184,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const getAllReviews = (id) => async (dispatch) => {
     try {
         dispatch({ type: ALL_REVIEW_REQUEST })
-        const { data } = await axios.get(`http://localhost:5000/api/v1/reviews?id=${id}`)
+        const { data } = await axios.get(`https://dress-light-server.vercel.app/api/v1/reviews?id=${id}`)
         dispatch({
             type: ALL_REVIEW_SUCCESS,
             payload: data.reviews,
@@ -204,7 +203,7 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
         dispatch({ type: DELETE_REVIEW_REQUEST });
 
         const { data } = await axios.delete(
-            `http://localhost:5000/api/v1/reviews?id=${reviewId}&productId=${productId}`
+            `https://dress-light-server.vercel.app/api/v1/reviews?id=${reviewId}&productId=${productId}`
         );
 
         dispatch({

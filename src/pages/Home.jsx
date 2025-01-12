@@ -70,8 +70,8 @@ const Home = () => {
                 </div>
                 <TopSeller
 
-                    from={6}
-                    to={9}
+                    from={1}
+                    to={6}
                     title={"To Seller Products"}
                     subTitle={"Explore our trending product!"}
                 />

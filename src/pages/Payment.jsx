@@ -41,7 +41,7 @@ const Payment = () => {
 
             };
 
-            const { data } = await axios.post("http://localhost:5000/api/v1/payment/process", paymentData, config)
+            const { data } = await axios.post("https://dress-light-server.vercel.app/api/v1/payment/process", paymentData, config)
             const client_secret = data.client_secret;
             if (!stripe || !element) return;
             const result = await stripe.confirmCardPayment(client_secret, {

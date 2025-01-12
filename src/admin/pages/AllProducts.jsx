@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { clearErrors, getAdminProduct } from '../../redux/action/productAction';
+import { clearErrors, deleteProduct, getAdminProduct } from '../../redux/action/productAction';
 import { Delete, Edit } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import Loading from '../../components/Loading';
@@ -11,14 +11,16 @@ import MetaData from '../../components/MetaData';
 import Sidebar from '../component/Sidebar';
 import { DataGrid } from '@mui/x-data-grid';
 import "../style/style.css";
+import { DELETE_ORDER_RESET } from '../../redux/constant/orderConstant';
 
 const AllProducts = () => {
     const dispatch = useDispatch();
     const { error, loading, products } = useSelector((state) => state.products);
+    const { error: deleteError, isDeleted } = useSelector((state) => state.product);
 
     const navigate = useNavigate();
 
-    const deleteProduct = (id) => {
+    const deleteProductHandler = (id) => {
         dispatch(deleteProduct(id));
     }
 
@@ -28,10 +30,19 @@ const AllProducts = () => {
             toast.error(error);
             dispatch(clearErrors())
         }
+        if(deleteError){
+            toast.warn(deleteError)
+            dispatch(clearErrors())
+           }
+           if(isDeleted){
+            toast.success("Product deleted successfully")
+            navigate("/admin/dashboard")
+            dispatch({type:DELETE_ORDER_RESET})
+           }
 
         dispatch(getAdminProduct())
 
-    }, [error, dispatch]);
+    }, [error, dispatch,deleteError,isDeleted,navigate]);
 
 
     const columns = [
@@ -72,7 +83,7 @@ const AllProducts = () => {
                         </Link>
 
                         <Button
-                            onClick={() => deleteProduct(params.row.id)}
+                            onClick={() => deleteProductHandler(params.row.id)}
                         >
                             <Delete />
                         </Button>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Card from "../components/Card";
 import { FaTh, FaBars } from 'react-icons/fa';
-import { Slider, } from '@mui/material';
+import {Slider, } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getProduct } from '../redux/action/productAction';
 import Loading from '../components/Loading';
 import toast from 'react-hot-toast';
+import Pagination from 'react-js-pagination';
+
 
 
 const categories = [
@@ -21,7 +23,8 @@ const categories = [
 
 const Products = () => {
     const dispatch = useDispatch();
-    const { products, error, loading } = useSelector((state) => state.products);
+    const [currentPage, setCurrentPage] = useState(1);
+    const { products, error, loading, productsCount, resultPerPage, filteredProductsCount } = useSelector((state) => state.products);
     const [view, setView] = useState('grid');
     const [price, setPrice] = useState([10, 25000]);
     const [category, setCategory] = useState('');
@@ -34,8 +37,8 @@ const Products = () => {
             dispatch(clearErrors());
         }
         // Dispatch initial product fetch without category filters
-        dispatch(getProduct(keyword, price, category));
-    }, [dispatch, error, keyword, price, category]);
+        dispatch(getProduct(keyword, price, category, currentPage));
+    }, [dispatch, error, keyword, price, category, currentPage]);
 
 
     const handleViewChange = (newView) => {
@@ -45,6 +48,10 @@ const Products = () => {
     const handleChange = (_, newValue) => {
         setPrice(newValue);
     };
+    //  pagination 
+    const setCurrentPageNo = (e) => {
+        setCurrentPage(e)
+    }
 
     const resetFilter = () => {
         setKeyword('')
@@ -52,6 +59,7 @@ const Products = () => {
         setCategory('');
 
     };
+    let count = filteredProductsCount;
     // console.log(selectedSubcategories);
 
     // console.log(keyword);
@@ -96,7 +104,6 @@ const Products = () => {
                                 </div>
                             </div>
                             <div className='bg-slate-100 rounded-t-lg w-3/4'>
-
                                 <div className='flex justify-end p-4 border-b-4'>
                                     {view === 'list' ? (
                                         <button
@@ -123,6 +130,29 @@ const Products = () => {
                                                 view={view}
                                             />
                                         ))}
+                                </div>
+                                <div className='py-10'>
+                                    {
+                                        resultPerPage < count && (
+                                            <div>
+                                                <Pagination
+                                                    activePage={currentPage}
+                                                    itemsCountPerPage={resultPerPage}
+                                                    totalItemsCount={productsCount}
+                                                    onChange={setCurrentPageNo}
+                                                    nextPageText="Next"
+                                                    prevPageText="Prev"
+                                                    firstPageText="First"
+                                                    lastPageText="Last"
+                                                    itemClass='page-item'
+                                                    linkClass='page-link'
+                                                    activeClass='pageItemActive'
+                                                    activeLinkClass='pageLinkActive'
+                                                >
+                                                </Pagination>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>
