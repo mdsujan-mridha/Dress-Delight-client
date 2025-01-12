@@ -164,7 +164,6 @@ export const createProduct = (productData) => async (dispatch) => {
             payload: error.response?.data.message
         })
     }
-
 }
 export const updateProduct = (id, productData) => async (dispatch) => {
     try {

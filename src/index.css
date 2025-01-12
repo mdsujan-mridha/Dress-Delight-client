@@ -264,3 +264,12 @@ body {
 .pageLinkActive {
   color: white;
 }
+
+
+/* React slick slider ===== */
+.carousel-container {
+  width: 100%; /* or a specific width */
+  overflow: hidden; /* Prevent horizontal scrollbar */
+}
+
+
