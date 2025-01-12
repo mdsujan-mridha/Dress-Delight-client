@@ -28,7 +28,7 @@ const UpdateUser = () => {
 
     useEffect(() => {
         const userDetailsFunction = async () => {
-            const res = await axios.get(`http://localhost:5000/api/v1/admin/user/${id}`)
+            const res = await axios.get(`https://dress-light-server.vercel.app/api/v1/admin/user/${id}`)
             // console.log(res?.data.user)
             setUser(res?.data.user)
         }

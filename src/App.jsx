@@ -44,7 +44,7 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
   axios.defaults.withCredentials = true;
   async function getStripKey() {
-    const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
+    const { data } = await axios.get("https://dress-light-server.vercel.app/api/v1/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
     console.log(data)
   }
