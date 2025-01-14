@@ -33,7 +33,7 @@ const Sidebar = () => {
                     <MdOutlinePreview  className='text-2xl text-white' />
                     <h1 className='text-2xl text-white text-center'> Review </h1>
                 </Link>
-                <Link to="/setting" className='text-center flex gap-5  items-center justify-start'>
+                <Link to="/admin/all-users" className='text-center flex gap-5  items-center justify-start'>
                     <FaUsers  className='text-2xl text-white' />
                     <h1 className='text-2xl text-white text-center'> Users </h1>
                 </Link>

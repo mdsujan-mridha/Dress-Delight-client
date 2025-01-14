@@ -33,6 +33,8 @@ import AllProducts from './admin/pages/AllProducts';
 import NewProduct from './admin/pages/NewProduct';
 import OrderList from './admin/pages/OrderList';
 import ProcessOrder from './admin/pages/ProcessOrder';
+import UserList from './admin/pages/UserList';
+import UpdateUser from './admin/pages/UpdateUser';
 
 function App() {
 
@@ -156,6 +158,31 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+          {/* user list  */}
+          <Route path='/admin/all-users'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <UserList />
+            </ProtectedRoute>}
+
+          >
+          </Route>
+          {/* update user  */}
+          {/* user list  */}
+          <Route path='/admin/user/:id'
+            element={<ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              adminRoute={true}
+              isAdmin={user?.role === "admin" ? true : false}
+            >
+              <UpdateUser />
+            </ProtectedRoute>}
+
+          >
+          </Route>
 
         </Routes>
         <Toaster />

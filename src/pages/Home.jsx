@@ -69,9 +69,8 @@ const Home = () => {
                     </div>
                 </div>
                 <TopSeller
-
-                    from={6}
-                    to={9}
+                    from={2}
+                    to={7}
                     title={"To Seller Products"}
                     subTitle={"Explore our trending product!"}
                 />
