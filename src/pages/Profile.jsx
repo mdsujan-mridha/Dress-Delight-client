@@ -17,8 +17,8 @@ const Profile = () => {
 
                 <div className='flex flex-col gap-5 mt-10 lg:flex-row lg:justify-between md:flex-row'>
                     <div className='w-96 bg-orange-500 h-52 rounded-md p-2'> <h1 className=' text-center text-white text-2xl py-5'> Total Order </h1> </div>
-                    <div className='w-96 bg-violet-500 h-52 rounded-md p-2'> <h1 className=' text-center text-white text-2xl py-5'> Total Order </h1> </div>
-                    <div className='w-96 bg-red-500 h-52 rounded-md p-2'> <h1 className=' text-center text-white text-2xl py-5'> Total Order </h1> </div>
+                    <div className='w-96 bg-violet-500 h-52 rounded-md p-2'> <h1 className=' text-center text-white text-2xl py-5'> Total Received  </h1> </div>
+                    <div className='w-96 bg-red-500 h-52 rounded-md p-2'> <h1 className=' text-center text-white text-2xl py-5'> Total Payment </h1> </div>
                 </div>
 
             </div>

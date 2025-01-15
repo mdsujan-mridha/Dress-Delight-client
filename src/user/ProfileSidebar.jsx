@@ -29,10 +29,7 @@ const ProfileSidebar = () => {
                         <FaList className='text-2xl text-white' />
                         <h1 className='text-2xl text-white text-center'> orders </h1>
                     </Link>
-                    <Link to="/update" className='text-center flex gap-5  items-center justify-start'>
-                        <FaEdit className='text-2xl text-white' />
-                        <h1 className='text-2xl text-white text-center'> Update </h1>
-                    </Link>
+                 
                     <Link to="/setting" className='text-center flex gap-5  items-center justify-start'>
                         <IoMdSettings className='text-2xl text-white' />
                         <h1 className='text-2xl text-white text-center'> Setting </h1>
